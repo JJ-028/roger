@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page de Roger</title>
+    <style>
+    body { font-family: Arial; }
+    .bloc { margin-bottom: 20px; }
+    label { font-weight: bold; display: block; margin-bottom: 5px; }
+    input, textarea { width: 300px; padding: 5px; }
+  
+
+  </style>
+  <link rel="stylesheet" href="roger-2.css">
+</head>
+
+
+
+<body>
+<h2> <u>Nom du personnage:</u> Roger TAMBOUILLE </h2>
+
+<h3> <div class="bloc">
+		<label for="clasniv"><u>Classe & Niveau :</u></label>
+		<input type="text" id="clasniv">
+	</div>
+</h3> 
+
+<h3> <u>Historique :</u></h3>
+	<p> Soldat </p>
+	
+<h3> <u>Race :</u> </h3>
+	<p> Humain</p>
+	
+<h3> <u>Alignement :</u></h3>
+	<p> Chaotique Bon </p>
+
+<h3> <div class="bloc">
+		<label for="pdx"><u>Points d'experiance:</u></label>
+		<input type="text" id="pdx">
+	</div>
+</h3>
+
+
+
+<h3> 
+	<div class="bloc">
+		<label for="ca"><u>CA:</u></label>
+		<input type="text" id="ca">
+	</div>
+</h3>
+
+<h3> <u>Initiative :</u> </h3>
+	<p> 10 </p>
+
+<h3> <u>Vitesees :</u> </h3>
+	<p> 9m </p>
+
+
+<!-- l'idée c'est d'avoir une barre jaugé de la longueure que je mettrait dans le code
+-->
+<h3> 
+	<div class="bloc">
+		<label for="pdv"><u>Points de vie actuels :</u></label>
+		<input type="text" id="pdv">
+	</div>
+</h3>
+
+<label for="pvActuels">
+  PV actuels : <span id="pvAffichage">50</span>
+</label>
+
+<input type="range" id="pvActuels" min="1" max="50" value="50">
+
+<script>
+  const pvSlider = document.getElementById("pvActuels");
+  const pvAffichage = document.getElementById("pvAffichage");
+
+  // Met à jour l'affichage quand on bouge le curseur
+  pvSlider.addEventListener("input", () => {
+    pvAffichage.textContent = pvSlider.value;
+  });
+
+  // Met à jour l'affichage au chargement de la page
+  pvAffichage.textContent = pvSlider.value;
+</script>
+<h3>  
+	<div class="bloc">
+		<label for="pdvt"><u>Points de vie tmporaires :</u></label>
+		<input type="text" id="pdvt">
+	</div>
+</h3>
+<h5> <u>Dès de vie :</u> </h5>
+	<p>1d10</p>
+
+	<div class="bloc">
+		<label for="tot">total:</label>
+		<input type="text" id="tot">
+	</div>
+
+<h3> <u>JDS contre la mort :</u>  </h3>
+<div class="death-saves">
+  <p>Succès :</p>
+  <label><input type="checkbox"></label>
+  <label><input type="checkbox"></label>
+  <label><input type="checkbox"></label>
+
+  <p>Échecs :</p>
+  <label><input type="checkbox"></label>
+  <label><input type="checkbox"></label>
+  <label><input type="checkbox"></label>
+</div><!-- ici une case a coché-->
+
+
+
+ <table>
+	<tr>
+		<th> COMPETANCE</th>
+		<th> POINTS</th>
+		<th> BONUS</th>
+	</tr>
+	<tr>
+		<td> Force</td>
+		<td> 18</td>
+		<td>3</td>
+	</tr>
+	<tr>
+		<td>Dexterité</td>
+		<td>10</td>
+		</td> </td>
+	</tr>
+	<tr>
+		<td>Constitution</td>
+		<td>16</td>
+		<td>3</td>
+	</tr>
+	<tr>
+		<td>Intelligence</td>
+		<td>8</td>
+		<td>-1</td>
+	</tr>
+	<tr>
+		<td>Sagesse</td>
+		<td>13</td>
+		<td>+1</td>
+	</tr>
+	<tr>
+		<td>Charisme</td>
+		<td>10</td>
+		<td> </td>
+	</tr>
+</table>
+
+<h5>Jets de sauvegarde:</h5>
+
+<table>
+	<tr>
+		<th>bonus/malus</th>
+		<th>capacité</th>
+	</tr>
+	<tr>
+		<td>+5</td>
+		<td>Force</td>
+	</tr>
+	<tr>
+		<td> </td>
+		<td>Dexterité</td>
+	</tr>
+	<tr>
+		<td>+5</td>
+		<td>Constitution</td>
+	</tr>
+	<tr>
+		<td>-1</td>
+		<td>Intelligence</td>
+	</tr>
+	<tr>
+		<td>+1</td>
+		<td>Sagesse</td>
+	<tr>
+		<td> </td>
+		<td>Charisme</td>
+	</tr>
+</table>
+
+ <table>
+	<tr>
+		<th> bonus</th>
+		<th> compétance</th>
+		<th> type</th>
+	</tr>
+	<tr>
+		<td> </td>
+		<td> Acrobaties</td>
+		<td>Dexterité</td>
+	</tr>
+	<tr>
+		<td>-1</td>
+		<td>Arcanes</td>
+		<td>Intelligence</td>
+	</tr>
+	<tr>
+		<td>16</td>
+		<td>Athlétisme</td>
+		<td>Force</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>Discrétion</td>
+		<td>Sagesse</td>
+	</tr>
+	<tr>
+		<td>+1</td>
+		<td>Dressage</td>
+		<td>Sagesse</td>
+	</tr>
+	<tr>
+		<td> </td>
+		<td>Escamotage</td>
+		<td>Dexterité </td>
+	</tr>
+		<tr>
+		<td> -1</td>
+		<td> Histoire</td>
+		<td>Intelligence</td>
+	</tr>
+	<tr>
+		<td>+2</td>
+		<td>Intimidation</td>
+		<td>Charisme</td>
+	</tr>
+	<tr>
+		<td>+3</td>
+		<td>Intuition</td>
+		<td>Sagesse</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>Investgation</td>
+		<td>Intelligence</td>
+	</tr>
+	<tr>
+		<td>+1</td>
+		<td>Medecine</td>
+		<td>Sagesse</td>
+	</tr>
+	<tr>
+		<td>-1 </td>
+		<td>Nature</td>
+		<td>Intelligence </td>
+	</tr>
+	<tr>
+		<td>+3</td>
+		<td>Perception</td>
+		<td>Sagesse</td>
+	</tr>
+	<tr>
+		<td> +3</td>
+		<td>Persuasion</td>
+		<td>Charisme </td>
+	</tr>
+		<tr>
+		<td> -1</td>
+		<td> Religion</td>
+		<td>Intelligence</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>Representation</td>
+		<td>Charisme</td>
+	</tr>
+	<tr>
+		<td>+3</td>
+		<td>Survie</td>
+		<td>Sagesse</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>Tromperie</td>
+		<td>Charisme</td>
+	</tr>
+
+</table>
+<h5><u>Sagesse(Perception) Passive :</u> </h5>
+
+
+<h3><u>
+	<div class="bloc">
+		<label for="aei1">Armes et incantations:</label>
+		<input type="text" id="aei1">
+	</div>
+</u></h3>
+		<div class="bloc">
+			<label for="aei2"></label>
+			<input type="text" id="aei2">
+		</div>
+		<div class="bloc">
+			<label for="aei3"></label>
+			<input type="text" id="aei3">
+		</div>
+		<div class="bloc">
+			<label for="aei4"></label>
+			<input type="text" id="aei4">
+		</div>
+		<div class="bloc">
+			<label for="aei5"></label>
+			<input type="text" id="aei5">
+		</div>	
+<p><u>Second souffle</u>: peut recuperer 1d10+1 en PDV </p>
+<p><u>Fougue</u>:Une action en plus (besoin d'un repos court ou long pour recuperer)</p>
+
+<h3><u>Autres maitrises et langues:</u></h3>
+<p>Armes courantes, armes de guerre.</p>
+<p>Toutes le armures, boucliers.</p>
+<p>Véhicules (terrestres)</p>
+<p>Ustensiles de cuisinier.</p>
+<p><u>Langue:</u> commun, nain,Halfelin.</p>
+
+
+
+ 	<div class="bloc">
+		<label for="pc"><u>PC:<u></label>
+		<input type="text" id="pc">
+	</div>
+
+ 
+ 	<div class="bloc">
+		<label for="pa"><u>PA:</u></label>
+		<input type="text" id="pa">
+	</div>
+
+
+ 	<div class="bloc">
+		<label for="pe"><u>PE:</u></label>
+		<input type="text" id="pe">
+	</div>
+
+
+	<div class="bloc">
+		<label for="po"><u>PO:</u></label>
+		<input type="text" id="po">
+	</div>
+
+
+ 	<div class="bloc">
+		<label for="pp"><u>PP:</u></label>
+		<input type="text" id="pp">
+	</div>
+
+
+<h3><u>Inventaire:</u></h3>
+<p>une cotte de maille - une épée longue - un bouclier - 2 hachettes - arc court avec 20 flèches - trousse de soin - un paquetage d'explorateur - une tenue de voyage - assortiment de 7 bougeoires - BRIQUE - potion de guérison - perle(100Po) - des ustenciles de cuisinier
+</p> 
+
+<h3><u>Capacités et Traits:</u> </h3>
+<p>Bottes d'arme :
+Votre entraînement martial vous permet de recourir à la botte de trois types d'arme courante ou de guerre de votre choix. Chaque fois que vous terminez un Repos long, vous pouvez accomplir des exercices martiaux pour changer l'un de ces choix.
+</p>
+<p>Second souffle :
+Vous disposez d'une réserve limitée d'endurance mentale et physique dans laquelle puiser. Par une action Bonus, vous pouvez y recourir pour récupérer des points de vie égaux à 1d10 + votre niveau de Guerrier. Vous pouvez recourir deux fois à cette aptitude. Vous en regagnez une utilisation lorsque vous terminez un Repos court, et récupérez tout le quota en terminant un Repos long.
+Style de combat (Don) (peut changer à chaque montée de niveau) :
+</p>
+<p>
+Duel :
+Lorsque vous tenez une arme de corps à corps dans une main et aucune autre arme, vous recevez un bonus de +2 aux jets de dégâts de cette arme.
+</p>
+<p>Ingénieux :
+Vous recevez l'Inspiration héroïque chaque fois que vous terminez un Repos long.
+</p>
+<p>
+Fougue :
+Vous pouvez vous surpasser pendant quelques instants. A votre tour, vous pouvez entreprendre une action supplémentaire, hormis l'action Magie. Une fois cette aptitude utilisée, vous devez terminer un Repos court ou long pour pouvoir y recourir de nouveau.
+</p>
+<p>
+Sens tactique :
+Vous faites preuve de talent tactique, aussi bien sur le champ d'honneur qu'en dehors. Lorsque vous ratez un test de caractéristique, vous pouvez utiliser une utilisation de Second souffle pour forcer le destin. Plutôt que de récupérer des points de vie, vous lancez un d10 pour en ajouter le résultat à votre test de caractéristique, ce qui peut le convertir en réussite. Si le test rate malgré tout, cette utilisation de Second souffle n'est pas dépensée.
+</p>
+<p>
+Sous-classe de Guerrier : Champion
+</p>
+<p>Athlète accompli : Grâce à vos qualités athlétiques, vous avez l'Avantage aux jets d'Initiative et aux tests de Force (Athlétisme). De plus, aussitôt après avoir obtenu un Coup critique, vous pouvez vous déplacer à concurrence de la moitié de votre Vitesse sans provoquer d'attaques d'Opportunité.
+</p>
+<p>
+Critique amélioré : Vos jets d'attaques avec des armes et à mains nues obtiennent un Coup critique sur un résultat de 19 ou 20 sur le d20.
+</p>
+<p>
+<strong>Don :</strong>
+</p>
+<p>
+- Sauvagerie martiale : Vous êtes formé à porter des coups dévastateurs. Une fois par tour, lorsque vous touchez une cible avec une arme, vous pouvez lancer deux fois les dés de dégâts de l'arme et choisir l'un ou l'autre résultat contre la cible
+</p>
+<p>
+- Robuste : Votre maximum de points de vie augmente d'un montant égal au double de votre niveau de personnage quand vous recevez ce don. Chaque fois que vous gagnez un niveau de personnage par la suite, votre maximum de points de vie augmente de 2 pv supplémentaires.
+</p>
+<p>- Maître des Armures lourdes
+</p>
+
+
+<h3><u>Trait de personalité:</u></h3>
+<p>J'aime être fort, casser des trucs et j'adore manger.</p>
+
+<h3><u>Idéaux:</u></h3>
+<p>J'aime pas les règles, parfois elles sont vraiments nulles </p>
+
+<h3><u>Liens:</u></h3>
+<p>Les gars qui se battent pour moi sont cool, je peux mourir pour eux</p>
+
+<h3><u>Défauts:</u></h3>
+<p>Je mange beaucoups trop. Je préfère manger mon armure plutôt d'admettre que j'ai tord</p>
+
+<h3><u>Âge:</u></h3>
+<p>43 ans </p>
+
+<h3><u>Taille:</u></h3>
+<p>1m67</p>
+
+<h3><u>Poids:</u></h3>
+<p>120 Kg </p>
+
+<h3><u>Yeux:</u></h3>
+<p>Marron</p>
+
+<h3><u>Peau:</u></h3>
+<p>Claire</p>
+
+<h3><u>Cheveux: </u></h3>
+<p>Bruns</p>
+
+<h3><u>Apparence du personnage:</u></h3>
+<p>Roger Tambouille est un homme trapu de 1m67, avec des épaules larges et un ventre proéminent. Il a un visage rond, une moustache fournie, et ses cheveux bruns coupés en une coupe au bol. Vêtu d'une côte de mailles usée, il arbore une épée longue et brandit une poêle en fonte, prête à frapper.</p>
+
+<h3><u>Histoire du personnage:</u></h3>
+<p>Roger Tambouille est né dans une famille de cuisiniers talentueux. Malheureusement, son appétit insatiable et son incapacité à résister aux plats qu'il devait servir provoquèrent sa chute. A 30 ans, après avoir ruiné un banquet, sa famille le chassa. Sa mère l'obligea à s'enrôler dans l'armée. Dans l'armée, Roger se révéla être un combattant puissant, mais son comportement chaotique et sa tendance à manger les rations des autres le firent renvoyer après quelques années. Encore une fois rejeté par sa famille, il se décida à devenir aventurier. Armé d'une épée, d'un bouclier et de sa fidèle poêle, Roger voyage. Guerrier atypique, il espère un jour regagner la fierté de sa famille, mais en attendant, il continue à se battre pour vivre… et pour manger.</p>
+ 
+ 
+
+<h3><u>Classe d'incantation (caractéristique d'incantation):</u></h3>
+<p></p>
+
+	<div class="bloc">
+		<label for="sap"><h3><u>Sort a preparer chaque jour:</u></h3></label>
+		<input type="text" id="sap">
+	</div>
+	
+		<div class="bloc">
+		<label for="dds"><h3><u>DD de sauvegarde des sorts:</u></h3></label>
+		<input type="text" id="dds">
+	</div>
+		<div class="bloc">
+		<label for="bas"><h3><u>Bonus d'attaque avec un sort:</u></h3></label>
+		<input type="text" id="bas">
+	</div>
+	
+<u><h3>0: Sorts mineurs</h3></u>
+<ul>
+	<li></li>
+</ul>
+
+<u><h3>1</h3></u>
+<ul>
+	<li></li>
+</ul>
+
+ 
+ 
+ 
+ 
+<script>
+    // Liste des champs à sauvegarder
+    const champs = ["clasniv", "pdx", "ca","pdv","pdvt","aei1","aei2","aei3","aei4","aei5","pc","pa","pe","po","pp","sap","dds","bas",];
+
+    // Charger les données sauvegardées
+    champs.forEach(id => {
+      const champ = document.getElementById(id);
+      champ.value = localStorage.getItem(id) || "";
+
+      // Sauvegarder à chaque modification
+      champ.addEventListener("input", () => {
+        localStorage.setItem(id, champ.value);
+      });
+    });
+	
+
+  </script>
+  
+  
+</body>
+</html>
