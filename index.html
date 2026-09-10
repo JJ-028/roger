@@ -574,7 +574,32 @@ un autre, ailleurs.</p>
 	
 
   </script>
-  
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const nbHaches = 18; // change le nombre ici
+  const images = ["hache_1.png", "hache_2.png", "hache_3.png"];
+
+  for (let i = 0; i < nbHaches; i++) {
+    const img = document.createElement("img");
+    img.src = images[Math.floor(Math.random() * images.length)];
+    img.classList.add("hache-random");
+
+    // position aléatoire
+    img.style.top = Math.random() * 100 + "vh";
+    img.style.left = Math.random() * 100 + "vw";
+
+    // taille aléatoire
+    const size = 60 + Math.random() * 80;
+    img.style.width = size + "px";
+
+    // rotation aléatoire
+    img.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+    document.body.appendChild(img);
+  }
+});
+</script>
+
   
 </body>
 </html>
