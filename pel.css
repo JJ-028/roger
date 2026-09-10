@@ -1,0 +1,461 @@
+/* =========================================================================
+   FICHE DE PERSONNAGE — VARIANTE « TAVERNE / GORE »
+   -------------------------------------------------------------------------
+   Même procédure que pour les deux refontes précédentes : nouvelle base
+   indépendante, palette resserrée autour d'UNE couleur dominante (le
+   magenta de ton image), plus deux touches ciblées :
+     - "taverne" : du bois chaud pour les bordures et les tableaux,
+       comme des planches de comptoir ;
+     - "gore" : du rouge sang, utilisé avec parcimonie (barre de PV,
+       jets de sauvegarde) plutôt que partout ;
+   et un motif récurrent : des haches, en fond de page et en puces de
+   liste.
+
+   Fond statique, aucune animation, comme sur les deux fiches précédentes.
+   ========================================================================= */
+
+
+/* -------------------------------------------------------------------------
+   1) POLICES D'ÉCRITURE
+   - "Metal Mania" pour les titres : une police à l'aspect taillé au
+     couteau, un peu brute/rugueuse — plus "bagarre de taverne" qu'un
+     titre noble. Différente des polices des trois autres fiches.
+   - "EB Garamond" pour le texte courant, comme sur toutes les fiches.
+   ------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Metal+Mania&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+
+
+/* -------------------------------------------------------------------------
+   2) VARIABLES DE COULEUR
+   Magenta en dominante (bordures, structure), bois en accent secondaire
+   (le côté taverne), et UNE couleur "gore" — le rouge sang — réservée à
+   quelques endroits précis pour rester une touche.
+   ------------------------------------------------------------------------- */
+:root {
+  --fond:          #1a0620; /* fond général : magenta presque noir, pénombre de taverne */
+  --magenta:       #ce01fe; /* magenta tiré de ton image : bordures, structure */
+  --magenta-vive:  #e94dfc; /* variante plus claire : lueur des titres, survols */
+
+  --sang:      #7a0e12; /* rouge sang sombre : base de la barre de PV */
+  --sang-vive: #c81f1f; /* rouge sang vif : accents "gore" (PV, jets de sauvegarde) */
+
+  --bois:       #5a3820; /* bois de comptoir : bordures des champs/tableaux */
+  --bois-clair: #8a5a34; /* reflet bois clair */
+
+  --parchemin:       #ede1c8; /* fond des champs et tableaux : papier/menu de taverne */
+  --parchemin-ombre: #cfbd90; /* ombre / bordure interne */
+  --encre:           #241a10; /* texte "à l'encre" sur le parchemin */
+
+  --texte-clair: #f0dff0; /* texte principal, légèrement rosé, lisible sur le fond magenta sombre */
+}
+
+
+/* -------------------------------------------------------------------------
+   3) RÉINITIALISATION DOUCE
+   ------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+/* -------------------------------------------------------------------------
+   4) FOND DE PAGE — statique, magenta, ta photo de hache en fond
+   -------------------------------------------------------------------------
+   Même logique que la refonte précédente (quelques haches posées à des
+   endroits fixes, pas de motif répété, pas d'animation), mais avec ta
+   vraie photo plutôt qu'un dessin SVG. Deux étapes ont été faites en
+   dehors du CSS, avec un script Python (fournies à côté : hache_1.png,
+   hache_2.png, hache_3.png, à garder dans le même dossier que ce CSS) :
+     1) fond blanc de la photo supprimé → fond transparent ;
+     2) recoloration en "duoton" (comme pour le blason de la fiche de
+        Roger) : un dégradé entre un quasi-noir et un gris-magenta
+        sourd, calculé à partir de la luminosité d'origine de chaque
+        pixel. Sans ça, la hache serait restée grise/argentée et aurait
+        juré avec le reste de la palette.
+   Trois fichiers séparés au lieu d'un seul, parce que le CSS ne peut
+   pas faire pivoter une image différemment à chaque fois qu'elle
+   apparaît dans un même calque : il fallait donc trois images déjà
+   tournées à des angles différents (18°, -25°, 8°) pour varier
+   l'orientation sans que ça ait l'air d'un simple copier-coller.
+   ------------------------------------------------------------------------- */
+body {
+  position: relative;
+  min-height: 100vh;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 48px 40px 96px;
+
+  background-color: var(--fond);
+  background-repeat: no-repeat;
+  background-attachment: scroll, fixed, fixed, fixed;
+  background-image:
+    radial-gradient(circle at 50% -10%, rgba(206, 1, 254, 0.22), transparent 55%),
+    url('hache_1.png'),
+    url('hache_2.png'),
+    url('hache_3.png');
+  /* tailles et positions volontairement irrégulières, comme jetées au
+     sol plutôt qu'alignées ; "contain" via une hauteur fixe et une
+     largeur "auto" pour ne pas déformer la photo */
+  background-size:
+    auto,
+    110px auto, 95px auto, 80px auto;
+  background-position:
+    50% -10%,
+    4% 78%, 92% 12%, 88% 82%;
+
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--texte-clair);
+
+  overflow-x: hidden;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* -------------------------------------------------------------------------
+   5) TITRES (h2, h3, h5)
+   -------------------------------------------------------------------------
+   Magenta vif avec une légère lueur, police "taillée au couteau". Une
+   petite paire de haches croisées sous le titre principal — le seul
+   endroit où le motif "hache" est répété deux fois d'un coup, pour
+   marquer clairement le titre sans surcharger le reste.
+   ------------------------------------------------------------------------- */
+h2, h3, h5 {
+  font-family: 'Metal Mania', 'Times New Roman', serif;
+  font-weight: 400; /* "Metal Mania" n'a qu'une seule graisse */
+  color: var(--magenta-vive);
+  letter-spacing: 0.02em;
+  margin: 1.6em 0 0.5em;
+  text-shadow: 0 0 8px rgba(206, 1, 254, 0.45);
+}
+
+h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 0;
+  padding-bottom: 0.6em;
+  border-bottom: 1px solid var(--sang-vive);
+}
+
+/* Haches croisées sous le titre principal : deux copies de la même
+   hache que celle du fond, tournées à +35°/-35° dans le SVG et
+   superposées — un clin d'œil "taverne/bagarre" directement sous le nom
+   du personnage. */
+h2::after {
+  content: "";
+  display: block;
+  width: 26px;
+  height: 26px;
+  margin: 10px auto 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg transform='rotate(35 12 12)'%3E%3Crect x='10.9' y='5' width='2.2' height='17' rx='1' fill='%23c81f1f'/%3E%3Cpath d='M13 3 C18 1 22 4 21 8 C20 11 15 10 13 8 Z' fill='%23c81f1f'/%3E%3C/g%3E%3Cg transform='rotate(-35 12 12)'%3E%3Crect x='10.9' y='5' width='2.2' height='17' rx='1' fill='%23c81f1f'/%3E%3Cpath d='M13 3 C18 1 22 4 21 8 C20 11 15 10 13 8 Z' fill='%23c81f1f'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.9;
+}
+
+h3 {
+  font-size: 1.15rem;
+}
+
+h5 {
+  font-size: 0.95rem;
+  color: var(--sang-vive); /* sous-titres en rouge sang, pour les distinguer des h3 magenta */
+  letter-spacing: 0.06em;
+}
+
+/* On retire le soulignement scolaire des <u> et on le remplace par un
+   filet magenta fin. */
+u {
+  text-decoration: none;
+  border-bottom: 1px solid var(--magenta);
+  padding-bottom: 2px;
+}
+
+
+/* -------------------------------------------------------------------------
+   6) CHAMPS DE SAISIE (text) ET TEXTAREA — planches de comptoir
+   ------------------------------------------------------------------------- */
+input[type="text"],
+textarea {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: normal;
+  color: var(--encre);
+
+  width: 300px;
+  padding: 6px 10px;
+  background: var(--parchemin);
+  border: 1px solid var(--bois);
+  border-radius: 2px;
+  box-shadow:
+    inset 0 1px 3px rgba(0, 0, 0, 0.3),
+    0 0 0 1px var(--parchemin-ombre);
+}
+
+/* Focus clavier : lueur magenta, cohérente avec la couleur dominante de
+   la fiche. */
+input[type="text"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--magenta);
+  box-shadow:
+    inset 0 1px 3px rgba(0, 0, 0, 0.3),
+    0 0 0 2px var(--magenta),
+    0 0 10px rgba(206, 1, 254, 0.45);
+}
+
+label {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-weight: 600;
+  letter-spacing: normal;
+  color: var(--texte-clair);
+  margin-bottom: 6px;
+}
+
+.bloc {
+  margin-bottom: 18px;
+}
+
+
+/* -------------------------------------------------------------------------
+   7) CURSEUR DE POINTS DE VIE — la touche "gore"
+   -------------------------------------------------------------------------
+   C'est ici que le rouge sang prend tout son sens : une jauge de PV en
+   dégradé sang sombre → vif, plutôt qu'en magenta — parce qu'une barre
+   de vie magenta aurait été moins parlante qu'une barre bien rouge.
+   ------------------------------------------------------------------------- */
+input[type="range"] {
+  width: 260px;
+  margin-top: 10px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #2b0507, var(--sang), var(--sang-vive));
+  border: 1px solid var(--magenta);
+}
+input[type="range"]::-moz-range-track {
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #2b0507, var(--sang), var(--sang-vive));
+  border: 1px solid var(--magenta);
+}
+
+/* Le pommeau : un petit disque magenta, pour rester raccord avec la
+   couleur dominante même si la jauge elle-même est rouge. */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  margin-top: -5px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--magenta-vive), var(--magenta) 75%);
+  border: 2px solid var(--sang-vive);
+  cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, var(--magenta-vive), var(--magenta) 75%);
+  border: 2px solid var(--sang-vive);
+  cursor: pointer;
+}
+
+#pvAffichage {
+  font-family: 'Metal Mania', serif;
+  font-weight: 400;
+  color: var(--sang-vive);
+  font-size: 1.15em;
+}
+
+
+/* -------------------------------------------------------------------------
+   8) JETS DE SAUVEGARDE CONTRE LA MORT
+   -------------------------------------------------------------------------
+   Deuxième (et dernier) endroit où le rouge sang apparaît de façon
+   marquée : les cases cochées se remplissent de rouge vif, comme une
+   petite éclaboussure — cohérent avec le fait que ces cases servent
+   justement à noter si le personnage est en train de mourir.
+   ------------------------------------------------------------------------- */
+.death-saves {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin: 10px 0;
+}
+
+.death-saves p {
+  margin: 0 6px 0 0;
+  padding: 0;
+  background: none;
+  border-left: none;
+  font-family: 'Metal Mania', serif;
+  font-size: 0.9rem;
+  color: var(--magenta-vive);
+}
+
+.death-saves input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--magenta);
+  background: #2b0518;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+}
+
+.death-saves input[type="checkbox"]:checked {
+  background: radial-gradient(circle at 35% 30%, var(--sang-vive), var(--sang) 75%);
+  border-color: var(--sang-vive);
+}
+
+
+/* -------------------------------------------------------------------------
+   9) TABLEAUX — menu de taverne
+   ------------------------------------------------------------------------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0 28px;
+  background: var(--parchemin);
+  border: 2px solid var(--bois);
+  font-family: 'EB Garamond', Georgia, serif;
+  color: var(--encre);
+}
+
+th, td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--parchemin-ombre);
+  text-align: left;
+}
+
+th {
+  font-family: 'Metal Mania', serif;
+  font-weight: 400;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  color: var(--parchemin);
+  background: linear-gradient(180deg, #3a2413, var(--encre));
+  border-bottom: 2px solid var(--bois-clair);
+}
+
+tr:nth-child(even) td {
+  background: rgba(90, 56, 32, 0.06);
+}
+
+tr:hover td {
+  background: rgba(206, 1, 254, 0.15);
+}
+
+
+/* -------------------------------------------------------------------------
+   10) LISTES (ul/li) — puces en hache
+   -------------------------------------------------------------------------
+   La même petite hache que celle du fond, réutilisée comme puce de
+   liste — cohérent avec le motif du fichier sans en ajouter un nouveau.
+   ------------------------------------------------------------------------- */
+ul {
+  list-style: none;
+  margin: 0.5em 0 1em;
+  padding-left: 0.2em;
+}
+
+li {
+  position: relative;
+  padding-left: 1.6em;
+  margin-bottom: 0.4em;
+  color: var(--texte-clair);
+}
+
+li::before {
+  content: "✦ ";
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  width: 1em;
+  height: 1em;
+
+
+
+/* -------------------------------------------------------------------------
+   11) PARAGRAPHES DE TEXTE
+   ------------------------------------------------------------------------- */
+p {
+  max-width: 68ch;
+  color: var(--texte-clair);
+  background: rgba(206, 1, 254, 0.05);
+  border-left: 2px solid var(--bois);
+  padding: 8px 14px;
+  margin: 6px 0 14px;
+}
+
+
+/* -------------------------------------------------------------------------
+   12) SÉLECTION DE TEXTE ET BARRE DE DÉFILEMENT
+   ------------------------------------------------------------------------- */
+::selection {
+  background: var(--sang-vive);
+  color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: var(--fond);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--magenta);
+  border-radius: 6px;
+  border: 3px solid var(--fond);
+}
+
+
+/* -------------------------------------------------------------------------
+   13) ADAPTATION MOBILE
+   -------------------------------------------------------------------------
+   Ne fonctionne que si le HTML a bien la balise
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   dans son <head>.
+   ------------------------------------------------------------------------- */
+@media (max-width: 600px) {
+  body {
+    padding: 28px 18px 64px;
+    font-size: 16px;
+  }
+
+  input[type="text"],
+  textarea,
+  input[type="range"] {
+    width: 100%;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  table {
+    font-size: 0.85rem;
+  }
+
+  th, td {
+    padding: 6px 8px;
+  }
+}
