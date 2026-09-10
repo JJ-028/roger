@@ -459,11 +459,3 @@ p {
     padding: 6px 8px;
   }
 }
-
-.hache-random {
-  position: fixed;
-  z-index: 0;
-  opacity: 0.22; /* même intensité que ton fond */
-  pointer-events: none;
-  user-select: none;
-}
